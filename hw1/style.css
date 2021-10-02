@@ -8,7 +8,7 @@ h1 {
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    width: 60%;
+    width: 70%;
     object-fit: cover;
 }
 
@@ -33,5 +33,27 @@ img {
 }
 
 .Flex-container > div:hover {
-    transform: scale(1.2);
+    transform: scale(1.15);
+}
+
+.menu{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 250px;
+    top: 0;
+    left: 0;
+    transition: transform 0.3s;
+}
+
+.menu > p:hover {
+    transform: scale(1.1);
+}
+
+.menu > div {
+    /* background-color: gray; */
+    color: DodgerBlue;
 }
