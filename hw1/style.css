@@ -47,6 +47,7 @@ img {
     top: 0;
     left: 0;
     transition: transform 0.3s;
+    flex-shrink: 2;
 }
 
 .menu > p:hover {
@@ -57,3 +58,9 @@ img {
     /* background-color: gray; */
     color: DodgerBlue;
 }
+
+@media screen and (max-width: 1300px) {
+    div.menu {
+      display: none;
+    }
+  }
