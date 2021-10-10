@@ -1,4 +1,5 @@
 h1 {
+    margin-left: 250px;
     text-align: center;
     /* font-size: 130px; */
     font-family:'Noto Sans Display'
@@ -10,8 +11,10 @@ h1 {
     margin-right: auto;
     justify-content: center;
     align-content: center;
+}
+
+.Main_pic > div {
     width: 70%;
-    object-fit: cover;
 }
 
 img {
@@ -20,11 +23,12 @@ img {
 }
 
 .Flex-container {
+    margin-left: 250px;
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
-    margin: 10px;
+    /* margin: 10px; */
 }
 
 .prev_img {
@@ -61,8 +65,31 @@ img {
     color: DodgerBlue;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1500px) {
     div.menu {
       display: none;
     }
+    div.Flex-container{
+        margin-left: auto;
+    }
+    div.Main_pic{
+        margin-left: auto;
+    }
+    h1{
+        margin-left: auto;
+    }
+  }
+
+  @media screen and (max-width: 800px){
+    div.Main_pic > div{
+        width: auto;
+    }
+  }
+
+  h2 {
+    font-family:'Noto Sans Display'
+  }
+
+  p {
+    font-family:'Noto Sans Display'
   }
