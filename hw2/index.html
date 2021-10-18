@@ -15,15 +15,15 @@
 </head>
 <body>
   <script src="main.js"></script>
-  <h1> Travel Pics </h1>
+  <h1 id="Title"> Travel Pics </h1>
     <!-- The big picture -->
     <div class="Main_pic">
         <!--height=648px width=1152px-->
-        <div><img src="./Photos/Lake.jpg" alt="Lake" id=Lake></div>
+        <img src="./Photos/Beach.jpeg" alt="main" id="main">
     </div>
     
     <div class="Flex-container">
-        <div class="prev_img" onclick="to_main(this)"><img src="./Photos/Beach.jpeg" alt="Beach"></div>
+        <div class="prev_img Border" onclick="to_main(this)"><img src="./Photos/Beach.jpeg" alt="Beach"></div>
         <div class="prev_img" onclick="to_main(this)"><img src="./Photos/Mountain.jpg" alt="Mountain"></div>
         <div class="prev_img" onclick="to_main(this)"><img src="./Photos/Road.jpg" alt="Road"></div>
         <div class="prev_img" onclick="to_main(this)"><img src="./Photos/Sunset.jpg" alt="Sunset"></div>
@@ -33,10 +33,10 @@
     
     <div class="menu">
         <h2>Albums</h2>
-        <div><p>Travel Pics</p></div>
-        <p>Dog Pictures</p>
-        <p>Pictures From Work</p>
-        <p>Screenshots</p>
+        <p onclick="changeSrc(this)" class="Selected_album">Travel Pics</p>
+        <p onclick="changeSrc(this)">Dog Pictures</p>
+        <p onclick="changeSrc(this)">Pictures From Work</p>
+        <!-- <p onclick="changeSrc(this)">Screenshots</p> -->
     </div>
 </body>
 </html>
