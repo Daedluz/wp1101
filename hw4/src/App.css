@@ -237,3 +237,8 @@ input[type='checkbox'] {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.todo-app__item-checked {
+  text-decoration: line-through;
+  opacity: 0.5;
+}

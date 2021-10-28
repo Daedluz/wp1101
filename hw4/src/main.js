@@ -3,21 +3,51 @@ import "./App.css"
 import Ximage from "./img/x.png"
 
 var items = 0
-var TodoList = []
-var todo_cnt = 0
+var TodoList = [] 
+export var todo_cnt = 0
+var id_cnt = 0
 
 export default class AppMain extends React.Component
 {
+    constructor(props) {
+        super(props);
+        this.state = {TodoList : []}
+    };
+
+    setTodo(e) 
+    {
+        this.setState({TodoList: [...this.state.TodoList, e]})
+        todo_cnt = todo_cnt + 1
+    }
+
+    createNewItem (e) 
+    {
+        id_cnt = id_cnt + 1
+        return <AppItem text={e} itemId={id_cnt}/>
+    }
+
     render()
     {
-        return(
-            <section className="todo-app__main">
-                <AppInput/>
-                <ul className="todo-app__list" id="todo-list">
-                    <AppItem/>
-                </ul>
-            </section>
-        );
+        if (this.state.TodoList.length === 0)
+        {
+            return(
+                <section className="todo-app__main">
+                    <AppInput setCnt={this.props.setCnt} setTodo={this.setTodo.bind(this)}/>
+                </section>
+            )
+        }
+        else
+        {
+            return(
+                <section className="todo-app__main">
+                    <AppInput setCnt={this.props.setCnt} setTodo={this.setTodo.bind(this)}/>
+                    <ul className="todo-app__list" id="todo-list">
+                        {this.state.TodoList.map((e) => <AppItem text={e} key={this.props.text}/>)}
+                    </ul>
+                </section>
+            )
+        }
+        
     }
 }
 
@@ -31,10 +61,11 @@ class AppInput extends React.Component
     handleKeyDown = (event) => {
         if (event.key === 'Enter'){
             // const newToDo = createNewToDo(input.value)
-            console.log(this.state.inputEntry)
             TodoList.push(this.state.inputEntry)
-            todo_cnt = todo_cnt + 1
+            this.props.setTodo(this.state.inputEntry)
+            this.props.setCnt(todo_cnt)
             this.setState({inputEntry : ''})
+
         }
     };
 
@@ -50,15 +81,25 @@ class AppInput extends React.Component
         );
     }
 }
-
+// this.handleChecked.bind(this)
 export class AppItem extends React.Component
 {
+    constructor(props) {
+        super(props);
+        this.state = {checked: false}
+    };
+
+    handleChecked = () =>
+    {
+        this.setState({checked: !this.state.checked})
+        console.log(this.props.text)
+    };
     render()
     {
         return(
             <li className="todo-app__item">
-                <ItemCheckbox />
-                <ItemDetail text={this.props.todo_text}/>
+                <ItemCheckbox clicked={this.handleChecked} text={this.props.text}/>
+                <ItemDetail text={this.props.text} checked={this.state.checked} />
                 <ItemX/>
             </li>
         )
@@ -67,16 +108,11 @@ export class AppItem extends React.Component
 
 export class ItemCheckbox extends React.Component
 {
-    handleChecked()
-    {
-
-    }
-
     render()
     {
         return (
             <div className="todo-app__checkbox">
-                <input id="2" type="checkbox" onClick={this.handleChecked}/>
+                <input id="2"  type="checkbox" onClick={this.props.clicked}/>
                 <label htmlFor="2"/>
             </div>
         )
@@ -85,10 +121,11 @@ export class ItemCheckbox extends React.Component
 
 export class ItemDetail extends React.Component
 {
+    
     render()
     {
         return (
-            <h1 className="todo-app__item-detail">{this.props.text}</h1>
+            <h1 className={this.props.checked ? `todo-app__item-detail todo-app__item-checked` : `todo-app__item-detail`}>{this.props.text}</h1>
         )
     }
 };
@@ -98,7 +135,6 @@ export class ItemX extends React.Component
     render()
     {
         return (<img src={Ximage} className="todo-app__item-x" />)
-        // https://imgur.com/bM4YjWF
     }
 };
 
@@ -123,9 +159,9 @@ class FooterViewItems extends React.Component
     {
         return(
             <ul className="todo-app__view-buttons">
-                <li><buttton>All</buttton></li>
-                <li><buttton>Active</buttton></li>
-                <li><buttton>Completed</buttton></li>
+                <li><button>All</button></li>
+                <li><button>Active</button></li>
+                <li><button>Completed</button></li>
             </ul>
         )
     }
