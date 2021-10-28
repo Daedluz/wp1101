@@ -1,45 +1,35 @@
 // import logo from './logo.svg';
 // import './App.css';
 import AppHeader from './header';
-import React from 'react';
+import React, {useState} from 'react';
 import AppMain from './main';
-import AppInput from './main';
 import {TodoFooter} from './main';
-import {todo_cnt} from './main';
 
-export default class App extends React.Component
+export default function App ()
 {
-  constructor(props) {
-    super(props);
-    this.state = {todoCnt : 0}
-  };
-  setCnt(e)
+  const [TodoList, setTodoList] = useState([])
+  
+  if (TodoList.length === 0)
   {
-    this.setState({todoCnt : e})
+    return (
+      <div id="root" className="todo-app__root">
+        <AppHeader />
+        <AppMain TodoList={TodoList} setTodoList={setTodoList}/>
+      </div>
+      
+    )
   }
-  render()
+  
+  else
   {
-    if (todo_cnt === 0)
-    {
-      return (
-        <div id="root" className="todo-app__root">
-          <AppHeader />
-          <AppMain setCnt={this.setCnt.bind(this)}/>
-        </div>
-        
-      )
-    }
-    
-    else
-    {
-      return (
-        <div id="root" className="todo-app__root">
-          <AppHeader />
-          <AppMain setCnt={this.setCnt.bind(this)}/>
-          <TodoFooter/>
-        </div>
-        
-      )
-    }
+    return (
+      <div id="root" className="todo-app__root">
+        <AppHeader />
+        <AppMain TodoList={TodoList} setTodoList={setTodoList}/>
+        <TodoFooter cnt={TodoList.length}/>
+      </div>
+      
+    )
   }
+  
 };
