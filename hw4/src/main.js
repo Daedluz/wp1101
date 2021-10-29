@@ -3,7 +3,7 @@ import "./App.css"
 import Ximage from "./img/x.png"
 
 
-export default function AppMain({TodoList, setTodoList})
+export default function AppMain({TodoList, setTodoList, FilteredList})
 {
     
     // const [inputEntry, setInputEntry] = useState("")
@@ -21,7 +21,7 @@ export default function AppMain({TodoList, setTodoList})
         <section className="todo-app__main">
             <input type="text" onKeyDown={handleKeyDown} id="todo-input" className="todo-app__input" placeholder="What needs to be done?" />
             <ul className="todo-app__list" id="todo-list">
-                {TodoList.map((e) => <AppItem text={e.text} itemId={e.id} key={e.id} todoList={TodoList} todo={e} setTodoList={setTodoList}/>)}
+                {FilteredList.map((e) => <AppItem text={e.text} itemId={e.id} key={e.id} todoList={TodoList} todo={e} setTodoList={setTodoList}/>)}
             </ul>
         </section>
     )
@@ -53,7 +53,7 @@ function AppItem ({text, itemId, todoList, todo, setTodoList})
     return(
         <li className="todo-app__item">
             <div className="todo-app__checkbox">
-                <input id={itemId}  type="checkbox" onClick={handleChecked}/>
+                <input id={itemId}  type="checkbox" onClick={handleChecked} defaultChecked={todo.completed ? true : false}/>
                 <label htmlFor={itemId}/>
             </div>
             <h1 className={todo.completed ? `todo-app__item-detail todo-app__item-checked` : `todo-app__item-detail`}>{text}</h1>
@@ -65,18 +65,19 @@ function AppItem ({text, itemId, todoList, todo, setTodoList})
 
 
 
-export function TodoFooter({cnt, setMode})
+export function TodoFooter({cnt, setMode, TodoList, setTodoList})
 {
+    var tmp = TodoList.filter((todo) => todo.completed === true)
     return(
         <footer className="todo-app__footer" id="todo-footer">
             <div className="todo-app__total">{cnt} left</div>
             <ul className="todo-app__view-buttons">
-                <li><button onClick={console.log('All')}>All</button></li>
-                <li><button onClick={console.log('Active')}>Active</button></li>
-                <li><button onClick={console.log("completed")}>Completed</button></li>
+                <li><button onClick={()=>setMode('All')}>All</button></li>
+                <li><button onClick={()=>setMode('Active')}>Active</button></li>
+                <li><button onClick={()=>setMode("Completed")}>Completed</button></li>
             </ul>
-            <div className="todo-app__clean">
-                <button>Clear completed</button>
+            <div className={tmp.length===0 ? "todo-app__clean hide" : "todo-app__clean"}>
+                <button onClick={()=>setTodoList(TodoList.filter((todo) => todo.completed === false))}>Clear completed</button>
             </div>
         </footer>
     )

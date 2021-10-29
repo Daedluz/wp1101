@@ -11,32 +11,29 @@ export default function App ()
   const [FilteredList, setFilterList] = useState([])
   const [mode, setMode] = useState('All')
 
-  // const handleFilter = () => {
-  //   console.log("Use effect")
-  //   console.log(TodoList)
-  //   console.log(FilteredList)
-  //   if (mode === 'All')
-  //   {
-  //     setFilterList(TodoList)
-  //   }
-  //   else if (mode === 'Active')
-  //   {
-  //     setFilterList(TodoList.filter((todo) => todo.completed === false))
-  //   }
-  //   else if (mode === 'Completed')
-  //   {
-  //     setFilterList(TodoList.filter((todo) => todo.completed === true))
-  //   }
-  // }
+  const handleFilter = () => {
+    if (mode === 'All')
+    {
+      setFilterList(TodoList)
+    }
+    else if (mode === 'Active')
+    {
+      setFilterList(TodoList.filter((todo) => todo.completed === false))
+    }
+    else if (mode === 'Completed')
+    {
+      setFilterList(TodoList.filter((todo) => todo.completed === true))
+    }
+  }
 
-  // useEffect(handleFilter, [mode, TodoList])
+  useEffect(handleFilter, [mode, TodoList])
   
-  if (TodoList.length === 0)
+  if (FilteredList.length === 0)
   {
     return (
       <div id="root" className="todo-app__root">
         <AppHeader />
-        <AppMain TodoList={TodoList} setTodoList={setTodoList}/>
+        <AppMain TodoList={TodoList} setTodoList={setTodoList} FilteredList={FilteredList}/>
       </div>
       
     )
@@ -48,8 +45,8 @@ export default function App ()
     return (
       <div id="root" className="todo-app__root">
         <AppHeader />
-        <AppMain TodoList={TodoList} setTodoList={setTodoList}/>
-        <TodoFooter cnt={TodoList.length} setMode={setMode}/>
+        <AppMain TodoList={TodoList} setTodoList={setTodoList} FilteredList={FilteredList}/>
+        <TodoFooter cnt={FilteredList.length} setMode={setMode} TodoList={TodoList} setTodoList={setTodoList}/>
       </div>
       
     )

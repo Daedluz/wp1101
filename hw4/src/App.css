@@ -242,3 +242,7 @@ input[type='checkbox'] {
   text-decoration: line-through;
   opacity: 0.5;
 }
+
+.hide {
+  display: none;
+}
