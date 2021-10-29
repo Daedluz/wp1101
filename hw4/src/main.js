@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css"
 import Ximage from "./img/x.png"
 
@@ -12,6 +12,7 @@ export default function AppMain({TodoList, setTodoList})
         if (event.keyCode === 13 && event.target.value !== ""){
             console.log("Enter pressed")
             setTodoList([...TodoList, {text: event.target.value, completed: false, id: Date.now()}])
+            event.target.value = ""
         }
 
     };
@@ -62,9 +63,7 @@ function AppItem ({text, itemId, todoList, todo, setTodoList})
 };
 
 
-{/* <li><button onClick={setMode('All')}>All</button></li>
-<li><button onClick={setMode('Active')}>Active</button></li>
-<li><button onClick={setMode('Completed')}>Completed</button></li> */}
+
 
 export function TodoFooter({cnt, setMode})
 {
@@ -72,9 +71,9 @@ export function TodoFooter({cnt, setMode})
         <footer className="todo-app__footer" id="todo-footer">
             <div className="todo-app__total">{cnt} left</div>
             <ul className="todo-app__view-buttons">
-                <li><button>All</button></li>
-                <li><button>Active</button></li>
-                <li><button>Completed</button></li>
+                <li><button onClick={console.log('All')}>All</button></li>
+                <li><button onClick={console.log('Active')}>Active</button></li>
+                <li><button onClick={console.log("completed")}>Completed</button></li>
             </ul>
             <div className="todo-app__clean">
                 <button>Clear completed</button>

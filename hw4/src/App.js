@@ -8,25 +8,28 @@ import {TodoFooter} from './main';
 export default function App ()
 {
   const [TodoList, setTodoList] = useState([])
-  // const [BackupList, setBackupList] = useState([])
-  // const [mode, setMode] = useState('All')
+  const [FilteredList, setFilterList] = useState([])
+  const [mode, setMode] = useState('All')
 
-  // useEffect(() => {
+  // const handleFilter = () => {
+  //   console.log("Use effect")
+  //   console.log(TodoList)
+  //   console.log(FilteredList)
   //   if (mode === 'All')
   //   {
-  //     setTodoList(BackupList)
+  //     setFilterList(TodoList)
   //   }
   //   else if (mode === 'Active')
   //   {
-  //     setBackupList(TodoList)
-  //     setTodoList(TodoList.filter((todo) => todo.completed === false))
+  //     setFilterList(TodoList.filter((todo) => todo.completed === false))
   //   }
   //   else if (mode === 'Completed')
   //   {
-  //     setBackupList(TodoList)
-  //     setTodoList(TodoList.filter((todo) => todo.completed === true))
+  //     setFilterList(TodoList.filter((todo) => todo.completed === true))
   //   }
-  // }, [mode])
+  // }
+
+  // useEffect(handleFilter, [mode, TodoList])
   
   if (TodoList.length === 0)
   {
@@ -46,7 +49,7 @@ export default function App ()
       <div id="root" className="todo-app__root">
         <AppHeader />
         <AppMain TodoList={TodoList} setTodoList={setTodoList}/>
-        <TodoFooter cnt={TodoList.length}/>
+        <TodoFooter cnt={TodoList.length} setMode={setMode}/>
       </div>
       
     )
