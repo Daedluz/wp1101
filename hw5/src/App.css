@@ -1,0 +1,71 @@
+.App {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  max-width: 53%;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buttons > button {
+  /* background-color: azure; */
+  list-style: none;
+  flex: 0 0 24%;
+  height: auto;  
+  justify-content: center;
+  border: none;
+  margin: 1px;
+  transition-duration: 0.2s;
+  font-size: x-large;
+}
+
+.buttons > button:before{
+  content: '';
+  display: block;
+  padding-top: 26.325%;
+}
+
+.buttons > button:after{
+  content: '';
+  display: block;
+  padding-top: 26.325%;
+}
+
+.buttons > button:hover{
+  background-color: rgb(145, 145, 145);
+  border: black;
+}
+
+.equal {
+  background-color: #a6a6a6d5;
+}
+
+.arithmetic {
+  background-color: #d9d9d9;
+}
+
+.display_bar {
+  text-align: right;
+  margin-right: 10%;
+}
+
+h1 {
+  font-size: 60px;
+}
+
+h2 {
+  color: #b3b3b3;
+}
+
+@media screen and (min-width: 1500px) {
+  .App {
+    max-width: 40%;
+  }
+}
