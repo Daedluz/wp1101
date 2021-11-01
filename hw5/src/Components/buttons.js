@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
 import '../App.css'
 
-export default function Buttons ({numberclicked, delClicked, operatorClicked, equalClicked, logClicked, clear})
+export default function Buttons ({numberclicked, delClicked, operatorClicked, equalClicked, logClicked, clear, memoryClicked})
 {
     return (
         <div className="buttons">
-            <button className="arithmetic">MR</button>
-            <button className="arithmetic">MC</button>
-            <button className="arithmetic">M+</button>
+            <button className="arithmetic" onClick={memoryClicked}>MR</button>
+            <button className="arithmetic" onClick={memoryClicked}>MC</button>
+            <button className="arithmetic" onClick={memoryClicked}>M+</button>
             <button className="arithmetic" onClick={clear}>CE</button>
 
             <button className="arithmetic" onClick={logClicked}>log</button>

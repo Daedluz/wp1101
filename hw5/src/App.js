@@ -154,13 +154,23 @@ function App() {
 
   function memoryClicked(e)
   {
-
+    switch(e.target.innerText)
+    {
+      case "M+":
+        setMemory(current_input)
+        break
+      case "MR":
+        setCurrent_input(memory)
+        setTotal_input(total_input + memory.toString())
+      case "MC":
+        setMemory(0)
+    }
   }
 
   return (
     <div className="App">
       <Display_bar current_input={current_input} total_input={total_input}/>
-      <Buttons clear={clear} numberclicked={numberclicked} delClicked={delClicked} operatorClicked={operatorClicked} equalClicked={equalClicked} logClicked={logClicked}/>
+      <Buttons memoryClicked={memoryClicked} clear={clear} numberclicked={numberclicked} delClicked={delClicked} operatorClicked={operatorClicked} equalClicked={equalClicked} logClicked={logClicked}/>
     </div>
   );
 }
