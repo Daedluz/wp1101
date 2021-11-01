@@ -1,34 +1,34 @@
 import React, {useState} from 'react'
 import '../App.css'
 
-export default function Buttons ()
+export default function Buttons ({numberclicked, delClicked, operatorClicked})
 {
     return (
         <div className="buttons">
-            <button className="arithmetic">log</button>
-            <button className="arithmetic">exp</button>
-            <button className="arithmetic">mod</button>
-            <button className="arithmetic">←</button>
+            <button className="arithmetic" onClick={console.log(parseInt("×"))}>log</button>
+            <button className="arithmetic" onClick={console.log(1)}>exp</button>
+            <button className="arithmetic" onClick={console.log(1)}>mod</button>
+            <button className="arithmetic" onClick={delClicked}>←</button>
 
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button className="arithmetic">÷</button>
+            <button onClick={(e) => numberclicked(e)}>1</button>
+            <button onClick={(e) => numberclicked(e)}>2</button>
+            <button onClick={(e) => numberclicked(e)}>3</button>
+            <button className="arithmetic" onClick={(e) => operatorClicked(e)}>÷</button>
 
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button className="arithmetic">×</button>
+            <button onClick={(e) => numberclicked(e)}>4</button>
+            <button onClick={(e) => numberclicked(e)}>5</button>
+            <button onClick={(e) => numberclicked(e)}>6</button>
+            <button className="arithmetic" onClick={(e) => operatorClicked(e)}>×</button>
 
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button className="arithmetic">-</button>
+            <button onClick={(e) => numberclicked(e)}>7</button>
+            <button onClick={(e) => numberclicked(e)}>8</button>
+            <button onClick={(e) => numberclicked(e)}>9</button>
+            <button className="arithmetic" onClick={(e) => operatorClicked(e)}>-</button>
 
             <button>.</button>
-            <button>0</button>
+            <button onClick={(e) => numberclicked(e)}>0</button>
             <button className="equal">=</button>
-            <button className="arithmetic">+</button>
+            <button className="arithmetic" onClick={(e) => operatorClicked(e)}>+</button>
         </div>
     )
 }
