@@ -1,13 +1,18 @@
 import React, {useState} from 'react'
 import '../App.css'
 
-export default function Buttons ({numberclicked, delClicked, operatorClicked})
+export default function Buttons ({numberclicked, delClicked, operatorClicked, equalClicked, logClicked, clear})
 {
     return (
         <div className="buttons">
-            <button className="arithmetic" onClick={console.log(parseInt("×"))}>log</button>
-            <button className="arithmetic" onClick={console.log(1)}>exp</button>
-            <button className="arithmetic" onClick={console.log(1)}>mod</button>
+            <button className="arithmetic">MR</button>
+            <button className="arithmetic">MC</button>
+            <button className="arithmetic">M+</button>
+            <button className="arithmetic" onClick={clear}>CE</button>
+
+            <button className="arithmetic" onClick={logClicked}>log</button>
+            <button className="arithmetic" onClick={(e) => operatorClicked(e)}>exp</button>
+            <button className="arithmetic" onClick={(e) => operatorClicked(e)}>mod</button>
             <button className="arithmetic" onClick={delClicked}>←</button>
 
             <button onClick={(e) => numberclicked(e)}>1</button>
@@ -25,9 +30,9 @@ export default function Buttons ({numberclicked, delClicked, operatorClicked})
             <button onClick={(e) => numberclicked(e)}>9</button>
             <button className="arithmetic" onClick={(e) => operatorClicked(e)}>-</button>
 
-            <button>.</button>
+            <button onClick={(e) => numberclicked(e)}>.</button>
             <button onClick={(e) => numberclicked(e)}>0</button>
-            <button className="equal">=</button>
+            <button className="equal" onClick={() => equalClicked()}>=</button>
             <button className="arithmetic" onClick={(e) => operatorClicked(e)}>+</button>
         </div>
     )
