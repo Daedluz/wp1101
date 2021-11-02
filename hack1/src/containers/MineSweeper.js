@@ -31,7 +31,7 @@ const MineSweeper = () => {
     }
     {/* -- TODO 5-2 -- */}
     const backToHomeOnClick = () => {
-        
+        setStartGame(false)
     }
 
     return( 
@@ -39,7 +39,7 @@ const MineSweeper = () => {
             {/* -- TODO 1-1 -- */} 
             {/* Useful Hint: If ... <HomePage startGameOnClick = {startGameOnClick} .../> else <Board .../> */}
             {/* Reminder: You can refer to the structure file in p.6 of Hack1.pdf. */}
-            {startGame ? <Board boardSize={8} mineNum={26}/> : <HomePage startGameOnClick = {startGameOnClick}/>}
+            {startGame ? <Board boardSize={boardSize} mineNum={mineNum} backToHome={backToHomeOnClick}/> : <HomePage startGameOnClick = {startGameOnClick}/>}
             
         </div>
     );

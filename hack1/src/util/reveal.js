@@ -49,7 +49,9 @@ export const revealed = (board, x, y, newNonMinesCount) => {
           {
             if (x+m >= 0 && x+m <board.length && y+n >= 0 && y+n < board.length)
             {
-              revealed(board, x+m, y+n, newNonMinesCount)
+               var value = revealed(board, x+m, y+n, newNonMinesCount)
+               board = value.board
+               newNonMinesCount = value.newNonMinesCount
             }
           }
         }
@@ -58,7 +60,7 @@ export const revealed = (board, x, y, newNonMinesCount) => {
 
     
     
-
+    // console.log("newNonMinesCount", newNonMinesCount)
     
     
     return {board, newNonMinesCount};

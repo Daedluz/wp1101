@@ -28,6 +28,16 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         freshBoard();
     }, []);
 
+    useEffect(() => {
+        // console.log("nonMineCount", nonMineCount)
+        if (nonMineCount === boardSize*boardSize-mineNum)
+        {
+            console.log("You Won!!")
+            setWin(true)
+            setGameOver(true)
+        }
+    }, [nonMineCount])
+
     // Creating a board
     const freshBoard = () => {
         {/* -- TODO 3-1 -- */}
@@ -42,6 +52,9 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
     const restartGame = () => {
         {/* -- TODO 5-2 -- */}
         {/* Useful Hint: freshBoard() */}
+        setGameOver(false)
+        setWin(false)
+        freshBoard()
         
     }
 
@@ -94,11 +107,6 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
             setBoard(value.board)
             setNonMineCount(value.newNonMinesCount)
         }
-
-        // if (value.newNonMinesCount === boardSize*boardSize-mineNum)
-        // {
-        //     setWin(true)
-        // }
         
     };
     // Cell({rowIdx, colIdx, detail, updateFlag, revealCell})
@@ -106,6 +114,7 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
     return(
         <div className = 'boardPage' >
             <div className = 'boardWrapper' >
+            {gameOver ? <Modal win={win} restartGame={restartGame} backToHome={backToHome}/> : ""}
             {/* <h1>This is the board Page!</h1>  This line of code is just for testing. Please delete it if you finish this function. */}
             
             {/* -- TODO 3-1 -- */}
