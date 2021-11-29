@@ -1,5 +1,5 @@
 {
-    "presents" : [
-        "@babel/present-env"
+    "presets" : [
+        "@babel/preset-env"
     ]
 }

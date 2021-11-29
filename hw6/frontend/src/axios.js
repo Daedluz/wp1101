@@ -9,7 +9,7 @@ const startGame = async () => {
 
 const guess = async (number) => {
     try {
-        const { data: {msg} } = await instance.get('/guess', { params: { number } } )
+        const { data: {msg} } = await instance.get('/guess', { params: number } )
         return msg
     }
     catch (error) {
