@@ -2,7 +2,7 @@ import ScoreCard from '../../models/ScoreCard';
 
 export default async function addData(req, res)
 {
-    console.log(req.body)
+    // console.log(req.body)
     const existing = await ScoreCard.findOne({ Name: req.body.name, Subject: req.body.subject })
     if (existing) {
         await ScoreCard.updateOne({ Name: req.body.name, Subject: req.body.subject }, 

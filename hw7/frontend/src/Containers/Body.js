@@ -67,6 +67,7 @@ const Body = () => {
   };
 
   const handleQuery = async () => {
+    console.log(queryType, queryString)
     const {
       data: { messages, message },
     } = await axios.get('/api/query-cards', {
@@ -75,7 +76,7 @@ const Body = () => {
         queryString,
       },
     });
-
+    
     if (!messages) addErrorMessage(message);
     else addRegularMessage(...messages);
   };

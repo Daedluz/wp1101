@@ -2,6 +2,7 @@
 import express from "express";
 import clear from './api/clear';
 import add from './api/add';
+import query from './api/query';
 
 const router = express.Router();
 
@@ -18,6 +19,13 @@ router.post('/create-card', (req, res) => {
     }
     
 });
+
+router.get('/query-cards', (req, res) => {
+    try {
+        query(req, res);
+    }
+    catch (e) { console.log(e); }
+})
 
 router.get('/', (req, res) => res.send("Hello world!"));
 

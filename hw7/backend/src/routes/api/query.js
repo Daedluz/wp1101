@@ -2,14 +2,30 @@ import ScoreCard from "../../models/ScoreCard";
 
 export default async function(req, res)
 {
-    const params = req.body.params.values()
-    console.log(params)
-    if(params[0] === "Name" )
+    console.log(req.body)
+    if(req.body.params.type === "Name" )
     {
-        ScoreCard.findMany({Name: params[1]})
+        const result = ScoreCard.findMany({Name: req.body.params.queryString})
+        if (result)
+        {
+            res.send({messages: result, message: ""})
+        }
+        else
+        {
+            res.send({messages: result, message: `${req.body.params.type} (${req.body.params.queryString}) not found !`})
+        }
+        
     }
     else // Subject
     {
-        ScoreCard.findMany({Subject: params[1]})
+        const result = ScoreCard.findMany({Name: req.body.params.queryString})
+        if (result)
+        {
+            res.send({messages: result, message: ""})
+        }
+        else
+        {
+            res.send({messages: result, message: `${req.body.params.type} (${req.body.params.queryString}) not found !`})
+        }
     }
 };
