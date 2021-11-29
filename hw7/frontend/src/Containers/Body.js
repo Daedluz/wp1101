@@ -71,10 +71,9 @@ const Body = () => {
     const {
       data: { messages, message },
     } = await axios.get('/api/query-cards', {
-      params: {
         type: queryType,
-        queryString,
-      },
+        queryString: queryString,
+      
     });
     
     if (!messages) addErrorMessage(message);
