@@ -9,6 +9,9 @@
     "nodemon": "^2.0.15",
     "ws": "^8.3.0"
   },
+  "scripts": {
+    "server": "nodemon server.js --ext js --exec babel-node"
+  },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.0",

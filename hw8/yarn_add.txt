@@ -1,0 +1,7 @@
+frontend :
+yarn add antd
+
+backend :
+yarn add express mongoose nodemon ws
+yarn add -D @babel/cli @babel/core @babel/node @babel/plugin-proposal-class-properties @babel/plugin-proposal-object-rest-spread @babel/plugin-transform-arrow-functions @babel/preset-env dotenv-defaults
+
