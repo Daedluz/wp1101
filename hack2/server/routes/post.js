@@ -18,11 +18,11 @@ router.get('/allPosts', (_, res) => {
 
 // DONE TODO 3-(1): create the 2nd API (/api/postDetail)
 router.get('/postDetail', async (req, res) => {
-    console.log(Object.entries(req.query)[0][1])
+    // console.log(Object.entries(req.query)[0][1])
     const pid = Object.entries(req.query)[0][1]
     try {
         const result = await Post.findOne({postId: pid})
-        console.log(result)
+        // console.log(result)
         res.send({ message:"success", post: result })
     }
     catch(err) {
@@ -43,6 +43,16 @@ router.post('/newPost', async (req, res) => {
 })
 
 // TODO 5-(1): create the 4th API (/api/post)
-
+router.delete('/post', async (req, res) => {
+    console.log(Object.entries(req.query)[0][1])
+    const pid = Object.entries(req.query)[0][1]
+    try {
+        await Post.deleteOne({ postId: pid })
+        res.send({message: "success"})
+    }
+    catch(err) {
+        res.send({message: "error", post: null})
+    }
+})
 
 export default router

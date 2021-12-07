@@ -19,13 +19,15 @@ function Post(props) {
 
   // TODO 5-(2): complete delPost function to delete a post from database
   const delPost = () => {
-      
+    console.log("deleting post..")
+    instance.delete('/post', { params: pid })
+    
     setTimeout(() => {
       props.navigate(-1)
     }, 300)
   }
 
-  // TODO 3-(2): fetch the full information of a post from database
+  // DONE TODO 3-(2): fetch the full information of a post from database
   useEffect(() => {
     getPostDetail()
   }, [])
@@ -41,8 +43,8 @@ function Post(props) {
           <div className="article-title" id="pid-detail-title">
             {data.title}
 
-            {/* TODO 5-(2): add property to IconButton to trigger the delPost function when click */}
-            <IconButton className="post-delete" size="small" id="pid-detail-del-btn">
+            {/* DONE TODO 5-(2): add property to IconButton to trigger the delPost function when click */}
+            <IconButton className="post-delete" size="small" id="pid-detail-del-btn" onClick={() => delPost()}>
               <DeleteIcon fontSize="inherit" />
             </IconButton>
           </div>
