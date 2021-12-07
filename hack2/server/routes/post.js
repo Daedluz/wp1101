@@ -35,10 +35,10 @@ router.get('/postDetail', async (req, res) => {
 // DONE TODO 4-(1): create the 3rd API (/api/newPost)
 router.post('/newPost', async (req, res) => {
     try {
-        console.log(req.body)
+        // console.log(req.body)
         const newPost = new Post (req.body)
+        await newPost.save()
         res.send({message: "success"})
-        return newPost.save()
     } catch(e) { res.send({message: "error", post: null}) }
 })
 

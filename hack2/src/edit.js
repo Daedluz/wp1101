@@ -10,11 +10,11 @@ function Edit(props) {
   const [content, setContent] = useState('')
 
   // DONE TODO 4-(2): complete handleSubmit function to create a new post and save it to database 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!title.trim()) { alert("Title can't be empty"); return; }
     if (!content.trim()) { alert("Content can't be empty"); return; }
 
-    instance.post('/newPost', { postId: uuidv4() , title, content, timestamp: Date.now() })
+    await instance.post('/newPost', { postId: uuidv4() , title, content, timestamp: Date.now() })
     
     setTimeout(() => {
       props.navigate(-1);
