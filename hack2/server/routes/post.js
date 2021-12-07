@@ -21,7 +21,7 @@ router.get('/postDetail', async (req, res) => {
     console.log(Object.entries(req.query)[0][1])
     const pid = Object.entries(req.query)[0][1]
     try {
-        const result = await Post.find({postId: pid})
+        const result = await Post.findOne({postId: pid})
         console.log(result)
         res.send({ message:"success", post: result })
     }
@@ -43,5 +43,6 @@ router.post('/newPost', async (req, res) => {
 })
 
 // TODO 5-(1): create the 4th API (/api/post)
+
 
 export default router

@@ -14,7 +14,7 @@ function Post(props) {
   const getPostDetail = async () => {
     const res = await instance.get(`/postDetail`, { params: pid })
     console.log(res)
-    setData(res.data.post[0])
+    setData(res.data.post)
   }
 
   // TODO 5-(2): complete delPost function to delete a post from database
