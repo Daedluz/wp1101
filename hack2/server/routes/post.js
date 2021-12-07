@@ -42,7 +42,7 @@ router.post('/newPost', async (req, res) => {
     } catch(e) { res.send({message: "error", post: null}) }
 })
 
-// TODO 5-(1): create the 4th API (/api/post)
+// DONE TODO 5-(1): create the 4th API (/api/post)
 router.delete('/post', async (req, res) => {
     console.log(Object.entries(req.query)[0][1])
     const pid = Object.entries(req.query)[0][1]

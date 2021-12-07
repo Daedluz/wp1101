@@ -18,7 +18,7 @@ function Edit(props) {
     
     setTimeout(() => {
       props.navigate(-1);
-    }, 300)
+    }, 400)
   }
 
   return (

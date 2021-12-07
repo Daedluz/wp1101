@@ -17,11 +17,11 @@ function Post(props) {
     setData(res.data.post)
   }
 
-  // TODO 5-(2): complete delPost function to delete a post from database
+  // DONE TODO 5-(2): complete delPost function to delete a post from database
   const delPost = () => {
     console.log("deleting post..")
     instance.delete('/post', { params: pid })
-    
+
     setTimeout(() => {
       props.navigate(-1)
     }, 300)
