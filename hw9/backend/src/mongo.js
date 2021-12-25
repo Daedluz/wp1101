@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 import dotenv from "dotenv-defaults";
 import http from 'http';
 import { sendData, sendStatus, initData } from './wssConnect';
-import Message from './models/Message';
 
 export default function mongo()
 {

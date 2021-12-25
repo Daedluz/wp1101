@@ -1,9 +1,12 @@
 import { GraphQLServer, PubSub } from 'graphql-yoga';
-import db from './db';
+import * as db from './db';
+import mongo from './mongo';
 import Query from './resolvers/Query';
 import Mutation from './resolvers/Mutation';
 import Subscription from './resolvers/Subscription';
-import mongo from './server';
+import ChatBox from './resolvers/ChatBox';
+import Message from './resolvers/Message';
+
 
 mongo();
 
@@ -15,4 +18,6 @@ const server = new GraphQLServer({
     context: { db, pubsub },
 });
 
-server.start();
+server.start({ port: process.env.PORT | 5000 }, () => {
+    console.log(`The server is up on port ${process.env.PORT | 5000}!`);
+  });
