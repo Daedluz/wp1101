@@ -6,6 +6,6 @@ const ChatBoxSchema = new Schema({
     messages: [{ type: mongoose.Types.ObjectId, ref: "Message" }],
 });
 
-const ChatBox = mongoose.model('ChatBox', ChatBoxSchema);
+const ChatBoxModel = mongoose.model('ChatBox', ChatBoxSchema);
 
-export default ChatBox
+export default ChatBoxModel
