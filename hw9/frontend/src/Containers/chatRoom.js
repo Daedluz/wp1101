@@ -1,58 +1,121 @@
 import { useState, useRef, useEffect } from 'react';
-import { Button, Input, message, Tag } from 'antd';
-import useChat from '../Hooks/useChat';
+import { useMutation } from '@apollo/client';
+import { CREATE_CHATBOX_MUTATION, CREATE_MESSAGE_MUTATION } from '../graphql';
+import { Button, Input, message, Tag, Tabs } from 'antd';
+import styled from 'styled-components';
 import Title from '../Components/Title';
-import Message from '../Components/Message';
+import ChatBox from './ChatBox';
+import ChatMoal from './ChatModal';
+import useChatBox from '../Hooks/useChatBox';
+import ChatModal from './ChatModal';
 
-const ChatRoom = ({messages, sendMessage, clearMessages, username, setUsername, bodyRef, body, setBody, displayStatus}) =>
+const Wrapper = styled(Tabs)`
+    width: 100%;
+    height: 300px;
+    background: #eeeeee52;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+`;
+
+const ChatRoom = ({me, displayStatus}) =>
 {
+    const [modalVisible, setModalVisible] = useState(false);
+    const [messageInput, setMessageInput] = useState('');
+    const [activeKey, setActiveKey] = useState('');
+
+
+    const { chatBoxes, createChatBox, removeChatBox } = useChatBox();
+    const [startChat] = useMutation(CREATE_CHATBOX_MUTATION);
+    const [sendMessage] = useMutation(CREATE_MESSAGE_MUTATION);
+
+    const addChatBox = () => 
+    {
+        setModalVisible(true);
+        console.log(modalVisible)
+    };
+    
+
     return (
         <>
-          <Title>
-            <h1>Simple Chat</h1>
-            <Button type="primary" danger onClick={clearMessages}>
-              Clear
-            </Button>
-          </Title>
-          <Message>
-            {messages.length === 0 ? 
-            (<p style={{ color: '#ccc' }}>
-              No messages...
-            </p>) : 
-            (messages.map(({name, body}, i) => 
-              <p className="App-message" key = {i}>
-                <Tag color="blue">{name}</Tag> {body}
-              </p>
-            ))}
-          </Message>
-          <Input
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            style={{ marginBottom: 10 }}
-            onKeyDown={(e) => {
-              if(e.key === 'Enter'){ bodyRef.current.focus() }
-            }}
-          ></Input>
-          <Input.Search
-            ref = {bodyRef}
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            enterButton="Send"
-            placeholder="Type a message here..."
-            onSearch={(msg) => {
-              if (!msg || !username)
-              {
-                displayStatus({
-    
-                })
-              }
-              sendMessage({name: username, body: msg})
-              setBody('')
-            }}
-          ></Input.Search>
+            <Title>
+                <h1>{me}'s Chat Room</h1>
+                <Button type="primary" danger>
+                {/* onClick={clearMessages} */}
+                    Clear
+                </Button>
+            </Title>
+
+            <Wrapper
+                tabBarStyle={{ height: "36px" }}
+                type='editable-card'
+                activeKey={activeKey}
+                onChange={(key) => { setActiveKey(key) }}
+                onEdit={(targetKey, action) => 
+                {
+                    if (action === "add") addChatBox();
+                    else if (action ==="remove")
+                    {
+                        setActiveKey(removeChatBox(targetKey, activeKey));
+                    }
+                }}>
+                {chatBoxes.map((friend) => (
+                    <Tabs.TabPane tab={friend}
+                        closable={true}
+                        key={friend}>
+                        
+                        <ChatBox me={me} friend={friend} key={friend} />
+
+                    </Tabs.TabPane>
+                ))}
+            </Wrapper>
+
+            <ChatModal
+                visible={modalVisible}
+                onCreate = {async (name) => 
+                {
+                    console.log(`Creating ChatBox for ${me} and ${name}`);
+                    await startChat({variables: {name1: me, name2: name}});
+
+                    setActiveKey(createChatBox(name));
+                    setModalVisible(false);
+                }}
+                onCancel={() => {
+                    setModalVisible(false);
+                }}/>
+
+            {/* <Input
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                style={{ marginBottom: 10 }}
+                onKeyDown={(e) => {
+                if(e.key === 'Enter'){ bodyRef.current.focus() }
+                }}
+            ></Input> */}
+            
+            {/* ref = {bodyRef}
+                value={body} */}
+            <Input.Search
+                onChange={(e) => setMessageInput(e.target.value)}
+                enterButton="Send"
+                placeholder="Type a message here..."
+                onSearch={(msg) => {
+                if (!msg)
+                {
+                    displayStatus({
+                        type: "error",
+                        msg: "Please enter message.",
+                    });
+                    return;
+                }
+                sendMessage({ variables: { from: me , to: "Cherry" , message: msg } })
+                setMessageInput('')
+                }}
+            ></Input.Search>
         </>
-      )
+    )
 }
 
 export default ChatRoom;
