@@ -18,7 +18,6 @@ const server = new GraphQLServer({
         Query,
         Mutation,
         Subscription,
-        User,
         Message,
         ChatBox,
     },

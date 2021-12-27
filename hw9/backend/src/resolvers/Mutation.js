@@ -22,6 +22,18 @@ const Mutation = {
 
         return chatBox;
     },
+    async createMessage (parent, { from, to, message }, { db, pubsub }, info)
+    {
+        console.log(from, to, message)
+        const user = await checkUser(db, from);
+        const msg = await newMessage(db, user, message);
+        
+        pubsub.publish(`New message from ${from}`, 
+        {
+            message: { mutation: 'CREATED', message: msg },
+        });
+        return msg;
+    }
 };
 
 export default Mutation;

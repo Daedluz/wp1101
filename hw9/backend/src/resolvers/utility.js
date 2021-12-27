@@ -36,7 +36,7 @@ const newChatBox = (db, chatBoxName) =>
 
 const newMessage = (db, sender, body) => 
 {
-    return new db.MessageModel({ sender, body }).save();
+    return new db.MessageModel({ sender: sender, body: body }).save();
 };
 
 export {
