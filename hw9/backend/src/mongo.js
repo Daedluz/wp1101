@@ -3,7 +3,6 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from "dotenv-defaults";
 import http from 'http';
-import { sendData, sendStatus, initData } from './wssConnect';
 
 export default function mongo()
 {

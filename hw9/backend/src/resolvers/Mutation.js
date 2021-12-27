@@ -2,6 +2,7 @@ import { makeName, checkUser, newUser, checkChatBox, newChatBox, checkMessage, n
 
 const Mutation = {
     async createChatBox(parent, { name1, name2 }, { db, pubsub }, info) {
+        console.log(`Creating chatbox for ${name1} and ${name2} `)
         if (!name1 || !name2)
             throw new Error("Missing chatBox name for createChatBox.");
 
@@ -27,7 +28,7 @@ const Mutation = {
         console.log(from, to, message)
         const user = await checkUser(db, from);
         const msg = await newMessage(db, user, message);
-        
+
         pubsub.publish(`New message from ${from}`, 
         {
             message: { mutation: 'CREATED', message: msg },
