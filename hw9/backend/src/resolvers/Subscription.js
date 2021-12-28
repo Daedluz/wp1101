@@ -14,7 +14,7 @@ const Subscription =
                 throw new Error('ChatBox not found.');
             }
 
-            return pubsub.asyncIterator(`New message from ${from}`);
+            return pubsub.asyncIterator(`MESSAGE CREATED ${from} ${to}`);
         },
     },
 };

@@ -35,6 +35,8 @@ const ChatRoom = ({me, displayStatus}) =>
         setModalVisible(true);
         console.log(modalVisible)
     };
+
+    useEffect(()=>{console.log(activeKey)}, [activeKey]);
     
 
     return (
@@ -110,7 +112,7 @@ const ChatRoom = ({me, displayStatus}) =>
                     });
                     return;
                 }
-                sendMessage({ variables: { from: me , to: "Cherry" , message: msg } })
+                sendMessage({ variables: { from: me , to: activeKey , message: msg } })
                 setMessageInput('')
                 }}
             ></Input.Search>

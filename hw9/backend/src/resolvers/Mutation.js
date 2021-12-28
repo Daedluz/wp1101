@@ -29,12 +29,13 @@ const Mutation = {
         const user = await checkUser(db, from);
         const msg = await newMessage(db, user, message);
 
-        pubsub.publish(`New message from ${from}`, 
+        pubsub.publish(`MESSAGE CREATED ${from} ${to}`, 
         {
             message: { mutation: 'CREATED', message: msg },
         });
         return msg;
-    }
+    },
+    // TODO update chatBox when message is created
 };
 
 export default Mutation;

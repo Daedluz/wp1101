@@ -39,11 +39,18 @@ const ChatBox = ({ me, friend, ...props }) =>
                     if (!subscriptionData.data ) return prev;
                     const newMessage = subscriptionData.data.message.message;
 
-                    console.log(prev);
+                    // if (prev.chatBox.messages.length === 0)
+                    // {
+                    //     return {
+                    //         chatBox: {
+                    //             messages: [newMessage],
+                    //         }
+                    //     }
+                    // }
 
                     return {
                         chatBox: {
-                            messages: [... prev.chatBox.messages, newMessage],
+                            messages: [newMessage, ... prev.chatBox.messages],
                         }
                     }
                 }

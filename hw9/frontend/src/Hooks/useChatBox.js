@@ -6,6 +6,7 @@ const useChatBox = () =>
     const createChatBox = (friend) => 
     {
         setChatBoxes([...chatBoxes, friend]);
+        return friend;
     }
     const removeChatBox = (targetKey, activeKey) => 
     {

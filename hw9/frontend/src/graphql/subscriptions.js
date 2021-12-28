@@ -8,7 +8,12 @@ export const MESSAGE_SUBSCRIPTION = gql`
             mutation
             message
             {
-                sender { name }
+                id
+                sender 
+                {
+                    id
+                    name 
+                }
                 body
             }
         }
