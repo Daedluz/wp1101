@@ -99,6 +99,7 @@ const ChatRoom = ({me, displayStatus}) =>
             {/* ref = {bodyRef}
                 value={body} */}
             <Input.Search
+                value={messageInput}
                 onChange={(e) => setMessageInput(e.target.value)}
                 enterButton="Send"
                 placeholder="Type a message here..."
