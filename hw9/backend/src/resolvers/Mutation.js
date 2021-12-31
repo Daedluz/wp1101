@@ -29,6 +29,13 @@ const Mutation = {
         const user = await checkUser(db, from);
         const msg = await newMessage(db, user, message);
 
+        const chatName = makeName(from, to);
+        const prev = await checkChatBox(db, chatName);
+
+        console.log(prev);
+
+        await db.ChatBoxModel.updateOne({name: chatName}, { messages: [...prev.messages, msg] });
+
         pubsub.publish(`MESSAGE CREATED ${from} ${to}`, 
         {
             message: { mutation: 'CREATED', message: msg },

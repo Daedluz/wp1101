@@ -5,7 +5,6 @@ import { Button, Input, message, Tag, Tabs } from 'antd';
 import styled from 'styled-components';
 import Title from '../Components/Title';
 import ChatBox from './ChatBox';
-import ChatMoal from './ChatModal';
 import useChatBox from '../Hooks/useChatBox';
 import ChatModal from './ChatModal';
 
@@ -103,17 +102,21 @@ const ChatRoom = ({me, displayStatus}) =>
                 onChange={(e) => setMessageInput(e.target.value)}
                 enterButton="Send"
                 placeholder="Type a message here..."
-                onSearch={(msg) => {
-                if (!msg)
-                {
+                onSearch={() => {
+                    if (!messageInput)
+                    {
+                        displayStatus({
+                            type: "error",
+                            msg: "Please enter message.",
+                        });
+                        return;
+                    }
+                    sendMessage({ variables: { from: me , to: activeKey , message: messageInput } });
                     displayStatus({
-                        type: "error",
-                        msg: "Please enter message.",
+                        type: "success",
+                        msg: "Message sent !",
                     });
-                    return;
-                }
-                sendMessage({ variables: { from: me , to: activeKey , message: msg } })
-                setMessageInput('')
+                    setMessageInput('');
                 }}
             ></Input.Search>
         </>
