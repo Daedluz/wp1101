@@ -10,7 +10,8 @@ const useChatBox = () =>
     }
     const removeChatBox = (targetKey, activeKey) => 
     {
-
+        setChatBoxes(chatBoxes.filter((value) => value !== targetKey));
+        return chatBoxes[0];
     }
 
     return { chatBoxes, createChatBox, removeChatBox };

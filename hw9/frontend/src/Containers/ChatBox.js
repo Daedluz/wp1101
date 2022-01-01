@@ -66,9 +66,6 @@ const ChatBox = ({ me, friend, ...props }) =>
                             messages: [... prev.chatBox.messages, newMessage],
                         // }
                     };
-
-                    // return data;
-                    
                 },
             });
         }
