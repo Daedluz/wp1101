@@ -20,14 +20,28 @@ const ChatBox = ({ me, friend, ...props }) =>
         variables: { name1: me, name2: friend },
     });
 
+    const [messages, setMessages] = useState([]);
+    const [init, setInit] = useState(false);
+
     const scrollToBottom = () => {
         messagesFooter.current?.scrollIntoView({ behavior: "smooth" });
     }
 
     useEffect(() => {
+        if (!loading && data && !init)
+        {
+            console.log("Initializing...");
+            setMessages(data.chatBox.messages);
+            setInit(true);
+        }
+    }, [loading])
+
+    useEffect(() => {
         scrollToBottom();
-        console.log(data);
-    }, [data]);
+        console.log("Messages in useEffect: ", messages);
+        // if (data && messages.length === 0)
+        //     setMessages(data.chatBox.messages);
+    }, [messages]);
 
     useEffect(() => 
     {
@@ -40,15 +54,20 @@ const ChatBox = ({ me, friend, ...props }) =>
                 {
                     if (!subscriptionData.data ) return prev;
                     const newMessage = subscriptionData.data.message.message;
+                    
+                    console.log("New message ", newMessage);
+                    setMessages( (prevMessages) => ([...prevMessages, newMessage]) );
 
                     return {
                         // chatBox: {
                             // id: prev.chatBox.id,
                             // name: prev.chatBox.name,
                             ...prev,
-                            messages: [newMessage, ... prev.chatBox.messages],
+                            messages: [... prev.chatBox.messages, newMessage],
                         // }
                     };
+
+                    // return data;
                     
                 },
             });
@@ -71,11 +90,11 @@ const ChatBox = ({ me, friend, ...props }) =>
     return (
         <Messages>
             {
-                data.chatBox.messages.length === 0 ? 
+                messages.length === 0 ? 
                 (<p style={{ color: '#ccc' }}>
                 No messages...
                 </p>) : 
-                data.chatBox.messages.map(({ sender: { name: name}, body }, i) => {
+                messages.map(({ sender: { name: name}, body }, i) => {
                     // <Message me={me} name={name} body={body} key={name + body + i} />
                     // console.log(name, body, i);
                     return (<p className="App-message" key = {i}>
